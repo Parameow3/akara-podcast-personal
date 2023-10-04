@@ -37,7 +37,6 @@ import model.Podcast;
 import model.api.desktop.model.AccessToken;
 import model.api.desktop.model.Credential;
 import model.api.desktop.model.RefreshToken;
-import staticUtility.DbUtils;
 
 import java.io.*;
 import java.net.URL;
@@ -450,15 +449,15 @@ public class MainFormController implements Initializable {
     @FXML
     public void profileClicked(MouseEvent event) throws IOException {
 
-        BorderPane login; // create a Profile VBox object to store the Profile VBox in the FXML file
+        BorderPane login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Login.fxml"))); // create a Profile VBox object to store the Profile VBox in the FXML file
         // check that user login or not
-        if (DbUtils.getRetrievedID() != 0) {
-            login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Profile.fxml")));
-        }
-        else {
-            login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Login.fxml")));
-            modeClicked(event);
-        }
+//        if (DbUtils.getRetrievedID() != 0) {
+//            login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Profile.fxml")));
+//        }
+//        else {
+//            login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Login.fxml")));
+//            modeClicked(event);
+//        }
 
         // set the Profile VBox to the center of the BorderPane of the MainForm
         borderPane.setCenter(login);
@@ -501,14 +500,14 @@ public class MainFormController implements Initializable {
     public void modeClicked(MouseEvent event) {
 
         // user can't change anything unless they log in
-        if (DbUtils.getRetrievedID() != 0) {
-            DbUtils.updateTheme(event, DbUtils.getRetrievedID());
-        }
-        if (!DbUtils.isRetrievedTheme()) {
-            setDarkMode();
-        } else {
-            setLightMode();
-        }
+//        if (DbUtils.getRetrievedID() != 0) {
+//            DbUtils.updateTheme(event, DbUtils.getRetrievedID());
+//        }
+//        if (!DbUtils.isRetrievedTheme()) {
+//            setDarkMode();
+//        } else {
+//            setLightMode();
+//        }
     }
 
 

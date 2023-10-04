@@ -147,11 +147,11 @@ public class DiscoverController implements Initializable {
             // Initialize the lists of podcasts to be displayed in the Discover page
 
             popularPodcast = new ArrayList<>(getPopularPodcast());
-            topPodcastInGaming = new ArrayList<>(getTopPodcastInGaming());
-            topPodcastInTechnology = new ArrayList<>(getTopPodcastInTechnology());
-            topPodcastInHistory = new ArrayList<>(getTopPodcastInHistory());
-            topPodcastInComedy = new ArrayList<>(getTopPodcastInComedy());
-            topPodcastInProgrammingLanguage = new ArrayList<>(getTopPodcastInProgrammingLanguage());
+//            topPodcastInGaming = new ArrayList<>(getTopPodcastInGaming());
+//            topPodcastInTechnology = new ArrayList<>(getTopPodcastInTechnology());
+//            topPodcastInHistory = new ArrayList<>(getTopPodcastInHistory());
+//            topPodcastInComedy = new ArrayList<>(getTopPodcastInComedy());
+//            topPodcastInProgrammingLanguage = new ArrayList<>(getTopPodcastInProgrammingLanguage());
 
             try {
 
@@ -160,30 +160,30 @@ public class DiscoverController implements Initializable {
                     popularPodcastContainer.getChildren().add(popularPane);
                 }
 
-                for (Podcast podcast : MainFormController.podcastList) {
-                    topGamingPane = getAnchorPane(podcast);
-                    topPodcastInGamingContainer.getChildren().add(topGamingPane);
-                }
-
-                for (Podcast podcast : MainFormController.podcastList) {
-                    topTechPane = getAnchorPane(podcast);
-                    topPodcastInTechnologyContainer.getChildren().add(topTechPane);
-                }
-
-                for (Podcast podcast : MainFormController.podcastList) {
-                    topHistoryPane = getAnchorPane(podcast);
-                    topPodcastInHistoryContainer.getChildren().add(topHistoryPane);
-                }
-
-                for (Podcast podcast : MainFormController.podcastList) {
-                    topComedyPane = getAnchorPane(podcast);
-                    topPodcastInComedyContainer.getChildren().add(topComedyPane);
-                }
-
-                for (Podcast podcast : MainFormController.podcastList) {
-                    topProgrammingPane = getAnchorPane(podcast);
-                    topPodcastInProgrammingLanguageContainer.getChildren().add(topProgrammingPane);
-                }
+//                for (Podcast podcast : MainFormController.podcastList) {
+//                    topGamingPane = getAnchorPane(podcast);
+//                    topPodcastInGamingContainer.getChildren().add(topGamingPane);
+//                }
+//
+//                for (Podcast podcast : MainFormController.podcastList) {
+//                    topTechPane = getAnchorPane(podcast);
+//                    topPodcastInTechnologyContainer.getChildren().add(topTechPane);
+//                }
+//
+//                for (Podcast podcast : MainFormController.podcastList) {
+//                    topHistoryPane = getAnchorPane(podcast);
+//                    topPodcastInHistoryContainer.getChildren().add(topHistoryPane);
+//                }
+//
+//                for (Podcast podcast : MainFormController.podcastList) {
+//                    topComedyPane = getAnchorPane(podcast);
+//                    topPodcastInComedyContainer.getChildren().add(topComedyPane);
+//                }
+//
+//                for (Podcast podcast : MainFormController.podcastList) {
+//                    topProgrammingPane = getAnchorPane(podcast);
+//                    topPodcastInProgrammingLanguageContainer.getChildren().add(topProgrammingPane);
+//                }
 
             } catch (IOException e) {
                 e.printStackTrace();

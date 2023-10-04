@@ -9,10 +9,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import staticUtility.DbUtils;
+import javafx.scene.paint.Color;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
+import kong.unirest.json.JSONObject;
+import model.Podcast;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -44,18 +51,9 @@ public class LoginController implements Initializable {
 
     @FXML
     public void loginClicked(MouseEvent event) throws IOException {
-        loginPane.setTop(null);
-        BorderPane profile = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Profile.fxml")));
-        loginPane.setCenter(profile);
-
-        // check theme for user
-        if(!DbUtils.isRetrievedTheme()) {
-            MainFormController.setDarkMode();
-        }
-        else {
-            MainFormController.setLightMode();
-        }
+        logIn();
     }
+
 
     @FXML
     public void signUpClicked(MouseEvent event) throws IOException {
@@ -67,12 +65,6 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DbUtils.logInUser(event, alertLabel, tf_Email.getText(), pf_password.getText());
-            }
-        });
 
         // show passwords
         pf_password.textProperty().bindBidirectional(tf_showPassword.textProperty());
@@ -87,6 +79,38 @@ public class LoginController implements Initializable {
         });
     }
 
+    private void logIn(){
+        String jsonInput = "{" + "\"email\": \"" + tf_Email.getText() + "\"," + "\"password\": \"" + pf_password.getText() + "\"" + "}";
+        HttpResponse<JsonNode> response = Unirest.post("https://dev.akarahub.tech/server4/signIn")
+                        .body(jsonInput).contentType("application/json").asJson();
+
+        System.out.println(response.getStatus());
+        JSONObject credentialJson = response.getBody().getObject();
+
+        boolean error = (boolean) credentialJson.get("error");
+
+        if (error){
+            System.out.println("User not found!!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Email or Password are incorrect!");
+            alert.show();
+            alert.close();
+
+            alertLabel.setText("Email or Password are incorrect!");
+            alertLabel.setTextFill(Color.RED);
+        }
+        else {
+            System.out.println("Login Successful");
+            loginPane.setTop(null);
+            BorderPane profile;
+            try {
+                profile = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/user/Profile.fxml")));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            loginPane.setCenter(profile);
+        }
+    }
 
     //#region FORGOT_BTN
     @FXML

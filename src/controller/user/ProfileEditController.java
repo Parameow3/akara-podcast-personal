@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
-import staticUtility.DbUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,14 +67,5 @@ public class ProfileEditController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        name_tf.setPromptText(DbUtils.getRetrievedName());
-        name_tf.setFocusTraversable(false);
-
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DbUtils.updateUserName(event, DbUtils.getRetrievedID(), name_tf.getText());
-            }
-        });
     }
 }

@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static staticUtility.DbUtils.getRetrievedName;
 
 public class ProfileController implements Initializable {
 
@@ -33,6 +32,6 @@ public class ProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // set username label
-        userNameLabel.setText(getRetrievedName());
+
     }
 }
